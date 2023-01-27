@@ -3,6 +3,9 @@ package Tests;
 import HelpMethods.AlertsMethods;
 import HelpMethods.ElementMethods;
 import HelpMethods.PageMethods;
+import Pages.AlertPage;
+import Pages.IndexPages;
+import Pages.RegisterPage;
 import ShareData.ShareData;
 import com.beust.ah.A;
 import org.openqa.selenium.Alert;
@@ -21,48 +24,16 @@ public class AlertTest extends ShareData {
 
     @Test
     public void metodaTest() {
+        IndexPages indexPages = new IndexPages(getDriver());
+        indexPages.clickSkipSignIn();
 
-        ElementMethods elementMethods = new ElementMethods(getDriver());
-        PageMethods pageMethods = new PageMethods(getDriver());
-        AlertsMethods  alertsMethods= new AlertsMethods(getDriver());
+        RegisterPage registerPage = new RegisterPage(getDriver());
+        registerPage.goToAlert();
 
-        WebElement SkipSignIn = getDriver().findElement(By.id("btn2"));
-       elementMethods.ClickElement(SkipSignIn);
-
-        WebElement SwitchTo = getDriver().findElement(By.xpath("//a[text()='SwitchTo']"));
-        //Mergem cu mouse-ul pe un anumit element
-        elementMethods.MoveToElement(SwitchTo);
-
-      WebElement AlertElement = getDriver().findElement(By.xpath("//a[text()='Alerts']"));
-       elementMethods.ClickElement(AlertElement);
-
-        //Navigam catre un Url
-
-
-        pageMethods.NavigateToPage("https://demo.automationtesting.in/Alerts.html");
-
-        List<WebElement> AlertOptions = getDriver().findElements(By.cssSelector(".nav-stacked>li>a")) ;
-        elementMethods.ClickElement( AlertOptions.get(0));
-
-        WebElement AlertOK = getDriver().findElement(By.cssSelector("#OKTab>button"));
-        elementMethods.ClickElement(AlertOK);
-
-
-        //Interactionam cu o alerta
-       alertsMethods.AcceptAlert();
-
-        elementMethods.ClickElement( AlertOptions.get(1));
-
-        WebElement AlertOkCancel = getDriver().findElement(By.cssSelector("#CancelTab>button"));
-        elementMethods.ClickElement(AlertOkCancel);
-
-       alertsMethods.DismissAlert();
-        elementMethods.ClickElement( AlertOptions.get(2));
-
-        WebElement AlertText = getDriver().findElement(By.cssSelector("#Textbox>button"));
-        elementMethods.ClickElement(AlertText);
-
-        alertsMethods.FillAlert("true",true);
+        AlertPage alertPage = new AlertPage(getDriver());
+        alertPage.interactAlertAccept();
+        alertPage.interactAlertDismiss();
+        alertPage.interactAlertValue("ceva");
 
     }
 }
