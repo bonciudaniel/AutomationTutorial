@@ -1,5 +1,8 @@
 package Tests;
 
+import HelpMethods.ElementMethods;
+import HelpMethods.PageMethods;
+import HelpMethods.WindowMethods;
 import ShareData.ShareData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,66 +18,72 @@ public class WindowTest extends ShareData {
 
 
 
+
+
     @Test
-    public void MetodaTest() throws InterruptedException {
+    public void MetodaTest(){
+
+        ElementMethods element = new ElementMethods(getDriver());
+        PageMethods element = new PageMethods(getDriver());
+        WindowMethods element = new WindowMethods(getDriver());
 
 
 
-        WebElement SkipSignIn = getDriver().findElement(By.id("btn2"));
-        SkipSignIn.click();
+        WebElement SkipRegister = getDriver().findElement(By.id("btn2"));
+       element.clickElement(SkipRegister);
 
 
+        WebElement SwitchToElement = getDriver().findElement(By.xpath("//a[text()='SwitchTo']"));
+
+        element.moveSpecificTabWindow(SwitchToElement);
+
+        WebElement clickWindows = getDriver().findElement(By.xpath("//a[text()='Windows']"));
+       element.ClickElement(clickWindows);
 
 
-        WebElement SwitchTo = getDriver().findElement(By.xpath("//a[text()='SwitchTo']"));
-
-
-        //Mergem cu mouse-ul pe un anumit element
-
-        Actions actions = new Actions(getDriver());
-        actions.moveToElement(SwitchTo).perform();
-
-        WebElement WindowElement = getDriver().findElement(By.xpath("//a[text()='Windows']"));
-        WindowElement.click();
-        getDriver().navigate().to("https://demo.automationtesting.in/Windows.html");
+        element.navigateToPage("https://demo.automationtesting.in/Windows.html");
 
         List<WebElement>WindowOptions = getDriver().findElements(By.cssSelector(".nav-stacked>li>a"));
         WindowOptions.get(0).click();
 
-        WebElement TabButton = getDriver().findElement(By.cssSelector("#Tabbed>a>button"));
-        TabButton.click();
+        element.clickElement(windowOption.get(0));
+        WebElement btn1 = getDriver().findElement(By.cssSelector(">a>button"));
+        element.ClickElement(btn1);
 
 
         //Identificam multimea de taburi/Windows-uri
-
-        List<String>Tabs=new ArrayList<>(getDriver().getWindowHandles());
         //Ne mutam cu focus-ul pe un tab specific
-        getDriver().switchTo().window(Tabs.get(1)) ;
+       element.moveSpecificTabWindow(1);
+       element.closeCurentTabsWindows();
+       element.moveSpecificTabWindow(0);
+
+
 
         //Inchidem tabul curent
         getDriver().close();
-        getDriver().switchTo().window(Tabs.get(0));
+        getDriver().switchTo().window(browserTabs.get(0));
 
         WindowOptions.get(1).click();
-        WebElement WindowButton = getDriver().findElement(By.cssSelector("#Seperate>button"));
-        WindowButton.click();
+        WebElement btn2 = getDriver().findElement(By.cssSelector("#Separate>button"));
+        element.clickElement(btn2);
 
         List<String>Windows=new ArrayList<>(getDriver().getWindowHandles());
         //Ne mutam cu foscus-ul pe un window specific
-        getDriver().switchTo().window(Windows.get(1)) ;
-        getDriver().close();
-        getDriver().switchTo().window(Windows.get(0));
+        element.moveSpecificTabWindow(1);
+        element.closeCurentTabsWindows();
+      element.moveSpecificTabWindow(0);
 
         WindowOptions.get(2).click();
+        WebElement btn3 = getDriver().findElement(By.cssSelector("#Multiple>button"));
+        element.clickElement(btn3);
 
-        WebElement MultipleButton = getDriver().findElement(By.cssSelector("#Multiple>button"));
-        MultipleButton.click();
-        List<String>Multiple=new ArrayList<>(getDriver().getWindowHandles());
-        getDriver().switchTo().window(Multiple.get(2)) ;
-        getDriver().close();
-        getDriver().switchTo().window(Multiple.get(1));
-        getDriver().close();
-        getDriver().switchTo().window(Multiple.get(0));
+        element.moveSpecificTabWindow(2);
+        element.closeCurentTabsWindows();
+        element.moveSpecificTabWindow(1);
+        element.closeCurentTabsWindows();
+        element.moveSpecificTabWindow(0);
+
+
 
 
 
