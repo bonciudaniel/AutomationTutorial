@@ -27,12 +27,12 @@ public class LoginPage extends BasePage{
 
     public void LoginInvalid(String emailValue,String parolaValue,String expectedError){
 
-        element.FilleElement(email,emailValue);
+        elementMethods.FilleElement(email,emailValue);
 
-        element.FilleElement(parola, parolaValue);
+        elementMethods.FilleElement(parola, parolaValue);
 
-        element.ClickElement(Enter);
-        element.ValidateElementText(error,expectedError);
+        elementMethods.ClickElement(Enter);
+        elementMethods.ValidateElementText(error,expectedError);
 
     }
 }

@@ -63,4 +63,7 @@ public class ElementMethods {
         Actions actions = new Actions(driver);
         actions.moveToElement(Element).perform();
     }
+
+    {
+    }
 }

@@ -3,6 +3,9 @@ package Tests;
 import HelpMethods.ElementMethods;
 import HelpMethods.FrameMethods;
 import HelpMethods.PageMethods;
+import Pages.FramePage;
+import Pages.IndexPages;
+import Pages.RegisterPage;
 import ShareData.ShareData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,49 +22,16 @@ public class FramesTest extends ShareData {
     @Test
     public void MetodaTest()  {
 
-        ElementMethods element = new ElementMethods(getDriver());
-        PageMethods WebElement = new PageMethods(getDriver()) ;
-        FrameMethods FilleElement = new FrameMethods(getDriver());
+        IndexPages indexPages = new IndexPages(getDriver());
+        indexPages.clickSkipSignIn();
 
-        WebElement SkipRegister = getDriver().findElement(By.id("btn2"));
-        element.ClickElement(SkipRegister);
+        RegisterPage registerPage = new RegisterPage(getDriver());
+        registerPage.goToFrame();
 
+        FramePage framePage = new FramePage(getDriver());
+        framePage.SingleFrame("test");
+        framePage.MultipleFrame("another test");
 
-
-        //Wait explicit cu conditii diferite
-
-        WebElement SwitchTo = getDriver().findElement(By.xpath("//a[text()='SwitchTo']"));
-
-
-
-        //Mergem cu mouse-ul pe un anumit element
-        element.MoveToElement(SwitchTo);
-
-
-        WebElement FrameElement = getDriver().findElement(By.xpath("//a[text()='Frames']"));
-        element.ClickElement(FrameElement);
-
-        WebElement.NavigateToPage("https://demo.automationtesting.in/Frames.html");
-
-        List<WebElement> FrameOptions = getDriver().findElements(By.cssSelector(".nav-tabs>li>a"));
-        element.ClickElement(FrameOptions.get(0));
-
-
-        //Ne mutam pe un Iframe
-        FilleElement.SwitchFrame("singleframe");
-        WebElement FirstFrame = getDriver().findElement(By.cssSelector("input[type='text']"));
-        FirstFrame.sendKeys("test");
-
-
-        FilleElement.SwitchDefault();
-        element.ClickElement(FrameOptions.get(1));
-
-        FilleElement.SwitchFrame(getDriver().findElement(By.cssSelector("iframe[src='MultipleFrames.html']")));
-        FilleElement.SwitchFrame(getDriver().findElement(By.cssSelector("iframe[src='SingleFrame.html']")));
-
-        WebElement SecondFrame = getDriver().findElement(By.cssSelector("input[type='text']"));
-        SecondFrame.sendKeys("test2");
-        FilleElement.SwitchDefault();
 
 
     }

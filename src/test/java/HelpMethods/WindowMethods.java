@@ -14,7 +14,7 @@ public class WindowMethods {
 
     public void moveSpecificTabWindow(Integer index){
         List<String> Multiple=new ArrayList<> (driver.getWindowHandles());
-        driver.switchTo().window(browserTabs.get(index));
+        driver.switchTo().window(Multiple.get(index));
     }
 
     public void closeCurentTabsWindows(){

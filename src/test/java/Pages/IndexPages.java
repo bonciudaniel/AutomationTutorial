@@ -22,10 +22,10 @@ public class IndexPages extends BasePage{
     //actiuni specifice pt IndexPage
 
     public void clickSignIn(){
-        element.ClickElement(SignIn);
+        elementMethods.ClickElement(SignIn);
     }
 
-    public void clickSignIn(){
-        element.ClickElement(SkipRegister);
+    public void clickSkipSignIn(){
+        elementMethods.ClickElement(SkipRegister);
     }
 }

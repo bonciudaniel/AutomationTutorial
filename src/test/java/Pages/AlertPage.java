@@ -26,7 +26,7 @@ public class AlertPage extends BasePage{
     public void interactAlertAccept(){
 
         elementMethods.ClickElement( AlertOptions.get(0));
-        element.ClickElement(btn1);
+        elementMethods.ClickElement(btn1);
         alertsMethods.AcceptAlert();
 
     }
