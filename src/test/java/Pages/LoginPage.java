@@ -1,6 +1,7 @@
 package Pages;
 
 import HelpMethods.ElementMethods;
+import Objects.LoginObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,14 +26,15 @@ public class LoginPage extends BasePage{
         super(driver);
     }
 
-    public void LoginInvalid(String emailValue,String parolaValue,String expectedError){
+    public void LoginInvalid(LoginObject loginObject){
 
-        elementMethods.FilleElement(email,emailValue);
+        elementMethods.FilleElement(email,loginObject.getEmail());
 
-        elementMethods.FilleElement(parola, parolaValue);
+        elementMethods.FilleElement(parola, loginObject.getPassword());
 
         elementMethods.ClickElement(Enter);
-        elementMethods.ValidateElementText(error,expectedError);
+
+        elementMethods.ValidateElementText(error,loginObject.getMessage());
 
     }
 }

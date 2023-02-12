@@ -3,10 +3,11 @@ package Tests;
 import Pages.IndexPages;
 import Pages.RegisterPage;
 import Pages.WindowPage;
-import ShareData.ShareData;
+
+import ShareData.Hooks;
 import org.testng.annotations.Test;
 
-public class WindowTest extends ShareData {
+public class WindowTest extends Hooks {
 
 
 
@@ -21,14 +22,17 @@ public class WindowTest extends ShareData {
 
       IndexPages indexPages = new IndexPages(getDriver());
       indexPages.clickSkipSignIn();
+        TestReport.AttachedReport("pass","I click on  Sign button");
 
       RegisterPage registerPage = new RegisterPage(getDriver());
       registerPage.goToWindow();
+        TestReport.AttachedReport("pass","Go to window");
 
       WindowPage windowPage = new WindowPage(getDriver());
       windowPage.TabProcess();
       windowPage.WindowProcess();
       windowPage.TabsProcess();
+        TestReport.AttachedReport("pass","Manage Tabs and Windows");
 
 
 

@@ -16,7 +16,7 @@ public class ShareData {
     }
 
     //Folosim adnotarea de @before din TestNG
-    @BeforeMethod
+
     public void  Setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/Driver/chromedriver.exe");
         driver = new ChromeDriver();
@@ -29,7 +29,7 @@ public class ShareData {
     }
 
         //folosim @after
-        @AfterMethod
+
                 public void Clear(){
 
         //inchidem un browser

@@ -1,5 +1,6 @@
 package Pages;
 
+import Objects.RegisterObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,32 +69,26 @@ public class RegisterPage extends BasePage{
       private WebElement Submit;
 
 
-      public void RegisterProcess(String FirstNameValue,String LastNameValue,String AdressValue, String EmailValue,String TelefonValue,
-                                  String skillValue,String yearValue, String expectedLanguage,String countryValue,String monthValue,String dayValue,String FirstPasswordValue,String confirmPasswordValue){
+      public void RegisterProcess(RegisterObject registerObject){
 
-          elementMethods.FilleElement(FirstName, FirstNameValue);
+          elementMethods.FilleElement(FirstName, registerObject.getFirstName());
 
-          elementMethods.FilleElement(LastName, LastNameValue);
-          elementMethods.FilleElement(Adress,AdressValue);
+          elementMethods.FilleElement(LastName, registerObject.getLastName());
+          elementMethods.FilleElement(Adress, registerObject.getAdress());
 
-          elementMethods.FilleElement(Email,EmailValue);
+          elementMethods.FilleElement(Email, registerObject.getEmail());
 
-          elementMethods.FilleElement(Telefon, TelefonValue);
+          elementMethods.FilleElement(Telefon, registerObject.getTelefon());
 
-          elementMethods.ClickElement(Gen);
 
-          elementMethods.ClickElement(Hobby);
-
-          elementMethods.SelectElementText(Skills,skillValue);
-
-          elementMethods.SelectElementValue(Year, yearValue);
+          elementMethods.SelectElementValue(Year, registerObject.getYear());
 
           elementMethods.ScrollByPixel(0 ,300);
 
           elementMethods.ClickElement(LanguageElement);
 
           for (Integer index=0 ; index < LanguageOptions.size(); index ++){
-              if (LanguageOptions.get(index).getText().equals(expectedLanguage)){
+              if (LanguageOptions.get(index).getText().equals(registerObject)){
                   elementMethods.ClickElement(LanguageOptions.get(index));
               }
           }
@@ -101,16 +96,16 @@ public class RegisterPage extends BasePage{
           elementMethods.ClickElement(Gen);
 
           elementMethods.ClickElement(SelectCountry);
-          elementMethods.FilleElement(SelectCountryInput, countryValue);
+          elementMethods.FilleElement(SelectCountryInput);
 
-          elementMethods.SelectElementText(Month, monthValue);
+          elementMethods.SelectElementText(Month, registerObject.getMonth());
 
-          elementMethods.SelectElementValue(Day, dayValue);
+          elementMethods.SelectElementValue(Day, registerObject.getDay());
 
 
-          elementMethods.FilleElement(FirstPassword,FirstPasswordValue);
+          elementMethods.FilleElement(FirstPassword, registerObject.getExpectedLanguage());
 
-          elementMethods.FilleElement(ConfirmPassword,confirmPasswordValue);
+          elementMethods.FilleElement(ConfirmPassword, registerObject.getConfirmPassword());
 
           elementMethods.ClickElement(Submit );
 
